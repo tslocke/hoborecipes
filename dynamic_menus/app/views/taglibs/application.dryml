@@ -1,0 +1,27 @@
+<include src="rapid" plugin="hobo"/>
+
+<include src="taglibs/auto/rapid/cards"/>
+<include src="taglibs/auto/rapid/pages"/>
+<include src="taglibs/auto/rapid/forms"/>
+
+<set-theme name="clean"/>
+
+<def tag="app-name">Dynamic Menus</def>
+
+
+<extend tag="form" for="Project">
+  <old-form merge>
+    <field-list: fields="name, country, city">
+      <city-view:>
+        <do part="city-menu">
+          <if test="&@project.country">
+            <select-one options="&@project.country.cities" />
+          </if>
+          <else>
+            <select disabled><option>First choose a country</option></select>
+          </else>
+        </do>
+      </city-view:>
+    </field-list:>
+  </old-form>
+</extend>
